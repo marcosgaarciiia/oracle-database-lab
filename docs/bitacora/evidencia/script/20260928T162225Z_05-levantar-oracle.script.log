@@ -1,0 +1,9 @@
+== Creando volumen persistente ==
+oralab-26ai-data
+
+== Levantando contenedor Oracle 23ai ==
+a9e349480b08f685afb3edde6bfdb87dcd31e9a4b4589e7ec6f1f56e954ab1ef
+
+== Contenedor iniciado en segundo plano ==
+CONTAINER ID   IMAGE                                                COMMAND                  CREATED         STATUS                                     PORTS                                                                                      NAMES
+a9e349480b08   container-registry.oracle.com/database/free:latest   "/bin/bash -c $SCRIP…"   7 seconds ago   Up Less than a second (health: starting)   0.0.0.0:1521->1521/tcp, [::]:1521->1521/tcp, 0.0.0.0:8181->8181/tcp, [::]:8181->8181/tcp   oralab-26ai

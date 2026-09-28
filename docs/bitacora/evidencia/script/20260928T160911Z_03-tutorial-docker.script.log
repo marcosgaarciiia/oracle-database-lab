@@ -1,0 +1,8 @@
+Script started on 2026-09-28
+== Practica guiada de Docker ==
+(Registro recuperado de la sesion interactiva)
+- Cliente y motor verificados.
+- Volumenes probados (persistencia de datos).
+- Redireccion de puertos probada (localhost:8080 -> nginx).
+- Consumo verificado: 5.422MiB / 5.788GiB
+Script done on 2026-09-28
