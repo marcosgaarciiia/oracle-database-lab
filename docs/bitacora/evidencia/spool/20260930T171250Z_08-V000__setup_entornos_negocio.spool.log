@@ -1,0 +1,77 @@
+
+Session altered.
+
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+
+SP2-0734: unknown command beginning "+-- Entorn..." - rest of line ignored.
+Help: https://docs.oracle.com/error-help/db/sp2-0734/
+
+Tablespace created.
+
+
+User created.
+
+
+Grant succeeded.
+
+== Verificacion: usuarios de negocio ==
+
+USERNAME
+--------------------------------------------------------------------------------
+DEFAULT_TABLESPACE	       ACCOUNT_STATUS
+------------------------------ --------------------------------
+ADMIN_ACADEMIA
+TBS_ACADEMIA		       OPEN
+
+ADMIN_CLINICA
+TBS_CLINICA		       OPEN
+
+ADMIN_FINTECH
+TBS_FINTECH		       OPEN
+
+
+USERNAME
+--------------------------------------------------------------------------------
+DEFAULT_TABLESPACE	       ACCOUNT_STATUS
+------------------------------ --------------------------------
+ADMIN_LOGISTICA
+TBS_LOGISTICA		       OPEN
+
+ADMIN_RETAIL
+TBS_RETAIL		       OPEN
+
+
