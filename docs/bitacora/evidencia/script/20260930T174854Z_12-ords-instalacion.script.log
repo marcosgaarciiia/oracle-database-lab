@@ -1,0 +1,21 @@
+== 1. Java (ORDS requiere 17 o 21) ==
+openjdk version "21.0.12.1" 2026-08-18
+== 2. Programa ORDS en /opt/oracle/ords ==
+
+ORDS: Release 26.3 Production on Wed Sep 30 17:49:05 2026
+
+Copyright (c) 2010, 2026, Oracle.
+
+Configuration:
+  /etc/ords/config
+
+Oracle REST Data Services 26.3.0.r2711507
+== 3. Instalacion en FREEPDB1 (no interactiva) ==
+
+ORDS: Release 26.3 Production on Wed Sep 30 17:49:08 2026
+
+Copyright (c) 2010, 2026, Oracle.
+
+Configuration:
+  /etc/ords/config
+

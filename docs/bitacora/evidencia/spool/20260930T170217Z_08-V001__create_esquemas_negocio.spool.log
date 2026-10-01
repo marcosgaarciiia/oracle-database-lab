@@ -1,0 +1,37 @@
+
+Session altered.
+
+
+Session altered.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Index created.
+
+
+Index created.
+
+
+Session altered.
+
+
+Table created.
+
+
+Table created.
+
+CREATE INDEX idx_cli_citas_paciente ON cli_citas(paciente_id)
+*
+ERROR at line 11:
+ORA-00922: missing or invalid option
+Help: https://docs.oracle.com/error-help/db/ora-00922/
+
+

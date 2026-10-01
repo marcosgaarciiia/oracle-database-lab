@@ -1,0 +1,16 @@
+
+Session altered.
+
+
+Session altered.
+
+
+Table created.
+
+ asignatura_id NUMBER GENERATED ALWAYS AS IDENTIFY PRIMARY KEY,
+                                          *
+ERROR at line 2:
+ORA-02000: missing ( keyword
+Help: https://docs.oracle.com/error-help/db/ora-02000/
+
+
