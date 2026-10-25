@@ -1,0 +1,8 @@
+Intento de conexión como admin_academia con la contraseña que quedó en V000:
+Connection failed
+  USER          = admin_academia
+  URL           = jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+  Error Message = ORA-01017: invalid credential or not authorized; logon denied
+
+https://docs.oracle.com/error-help/db/ora-01017/
+
