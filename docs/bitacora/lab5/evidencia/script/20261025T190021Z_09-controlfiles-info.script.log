@@ -1,0 +1,58 @@
+
+===== 1. Copias del control file (multiplexación) =====
+
+NAME						 STATUS  BLOCK_SIZE FILE_SIZE_BLKS
+------------------------------------------------ ------- ---------- --------------
+/opt/oracle/oradata/FREE/control01.ctl			      16384	      1146
+/opt/oracle/oradata/FREE/control02.ctl			      16384	      1146
+
+===== 2. Qué registra: secciones con más registros ocupados (v$controlfile_record_section) =====
+
+TYPE			     RECORDS_TOTAL RECORDS_USED
+---------------------------- ------------- ------------
+STANDBY DATABASE MATRIX 	       128	    128
+OFFLINE RANGE			      1063	     54
+FILENAME			      4146	     23
+DATAFILE			      1024	     21
+TABLESPACE			      1024	     20
+ACM OPERATION				64	     13
+LOG HISTORY			       292	     10
+ARCHIVED LOG				28	     10
+THREAD INSTANCE NAME MAPPING		 8	      8
+DELETED OBJECT			       818	      5
+
+===== 3. Cuántos días conserva registros reutilizables (p. ej., historial de archivados) =====
+
+NAME						 VALUE
+------------------------------------------------ ------------------------------------------------------------
+control_file_record_keep_time			 7
+
+===== 4. Copia de seguridad LÓGICA del control file: un script CREATE CONTROLFILE legible =====
+Creado /opt/oracle/oradata/FREE/controlfile_lab5.trc (dentro del volumen)
+
+== Extracto del script CREATE CONTROLFILE (copia lógica, queda en el volumen, no en Git) ==
+CREATE CONTROLFILE REUSE DATABASE "FREE" NORESETLOGS FORCE LOGGING ARCHIVELOG
+    MAXLOGFILES 16
+    MAXLOGMEMBERS 3
+    MAXDATAFILES 1024
+    MAXINSTANCES 8
+    MAXLOGHISTORY 292
+LOGFILE
+  GROUP 1 '/opt/oracle/oradata/FREE/redo01.log'  SIZE 200M BLOCKSIZE 512,
+  GROUP 2 '/opt/oracle/oradata/FREE/redo02.log'  SIZE 200M BLOCKSIZE 512,
+  GROUP 3 '/opt/oracle/oradata/FREE/redo03.log'  SIZE 200M BLOCKSIZE 512
+-- STANDBY LOGFILE
+DATAFILE
+  '/opt/oracle/oradata/FREE/system01.dbf',
+  '/opt/oracle/oradata/FREE/pdbseed/system01.dbf',
+  '/opt/oracle/oradata/FREE/sysaux01.dbf',
+  '/opt/oracle/oradata/FREE/pdbseed/sysaux01.dbf',
+  '/opt/oracle/oradata/FREE/users01.dbf',
+  '/opt/oracle/oradata/FREE/pdbseed/undotbs01.dbf',
+  '/opt/oracle/oradata/FREE/undotbs01.dbf',
+  '/opt/oracle/oradata/FREE/FREEPDB1/system01.dbf',
+  '/opt/oracle/oradata/FREE/FREEPDB1/sysaux01.dbf',
+  '/opt/oracle/oradata/FREE/FREEPDB1/undotbs01.dbf',
+  '/opt/oracle/oradata/FREE/FREEPDB1/users01.dbf',
+  '/opt/oracle/oradata/FREE/FREEPDB1/academia01.dbf',
+  '/opt/oracle/oradata/FREE/FREEPDB1/clinica01.dbf',
