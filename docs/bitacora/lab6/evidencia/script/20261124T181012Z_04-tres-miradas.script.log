@@ -1,0 +1,71 @@
+== EVIDENCIA alumno=E025 hora=2026-11-24T18:10:12Z origen=04-tres-miradas
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-24T18:02:31 scn=5244210
+################ Mirada 1 · C##OPS_RO en CDB$ROOT (con CONTAINER_DATA = ALL) ################
+
+USUARIO        CONTENEDOR
+-------------- ----------
+C##OPS_RO      CDB$ROOT  
+
+VISTA                               FILAS
+------------------------------ ----------
+USER_TABLES (lo mío)                    0
+ALL_TABLES de ADMIN_ACADEMIA            0
+ALL_USERS (los que veo)                37
+-- DBA_USERS (todo el contenedor actual):
+
+ DBA_USERS
+----------
+        37
+-- CDB_USERS por contenedor (todos los contenedores que tengo permitido ver):
+
+    CON_ID  CDB_USERS
+---------- ----------
+         1         37
+         3         44
+-- V$DATAFILE (datafiles visibles):
+
+ DATAFILES
+----------
+        17
+################ Mirada 2 · C##OPS_RO entrando por el servicio freepdb1 ################
+
+USUARIO        CONTENEDOR
+-------------- ----------
+C##OPS_RO      FREEPDB1  
+
+VISTA                               FILAS
+------------------------------ ----------
+USER_TABLES (lo mío)                    0
+ALL_TABLES de ADMIN_ACADEMIA            0
+ALL_USERS (los que veo)                44
+-- DBA_USERS (todo el contenedor actual):
+
+ DBA_USERS
+----------
+        44
+-- CDB_USERS por contenedor (todos los contenedores que tengo permitido ver):
+
+    CON_ID  CDB_USERS
+---------- ----------
+         3         44
+-- V$DATAFILE (datafiles visibles):
+
+ DATAFILES
+----------
+        10
+################ Mirada 3 · APP_ACADEMIA por academia_app (cuenta de aplicación, sin catálogo) ################
+Connection failed
+  USER          = app_academia
+  URL           = jdbc:oracle:thin:@//localhost:1521/academia_app
+  Error Message = ORA-01017: invalid credential or not authorized; logon denied
+
+https://docs.oracle.com/error-help/db/ora-01017/
+
+SP2-0640: Not connected
+SP2-0640: Not connected
+-- DBA_USERS (todo el contenedor actual):
+SP2-0640: Not connected
+-- CDB_USERS por contenedor (todos los contenedores que tengo permitido ver):
+SP2-0640: Not connected
+-- V$DATAFILE (datafiles visibles):
+SP2-0640: Not connected
