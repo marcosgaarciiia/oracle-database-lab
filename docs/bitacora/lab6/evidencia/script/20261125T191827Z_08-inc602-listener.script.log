@@ -1,0 +1,4 @@
+== EVIDENCIA alumno=E025 hora=2026-11-25T19:18:27Z origen=08-inc602-listener
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-25T17:18:33 scn=7284763
+Service "academia_app" has 1 instance(s).
+  Instance "FREE", status READY, has 1 handler(s) for this service...

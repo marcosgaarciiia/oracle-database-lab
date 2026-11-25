@@ -1,0 +1,30 @@
+== EVIDENCIA alumno=E025 hora=2026-11-25T19:03:52Z origen=inc603-auditoria
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-25T17:18:33 scn=7282260
+
+Session altered.
+
+
+EVENT_TIMESTAMP 							    DBUSERNAME	    ACTION_NAME
+--------------------------------------------------------------------------- --------------- ----------------------------------------------------------------
+SQL_TEXT
+------------------------------------------------------------
+25-NOV-26 07.02.57.167488 PM						    SYS 	    ALTER USER
+ALTER USER app_academia ACCOUNT UNLOCK
+
+25-NOV-26 06.51.38.688864 PM						    SYS 	    ALTER USER
+ALTER USER app_academia ACCOUNT LOCK
+
+24-NOV-26 06.17.58.876996 PM						    SYS 	    ALTER USER
+ALTER USER app_academia IDENTIFIED BY * ACCOUNT UNLOCK
+
+
+EVENT_TIMESTAMP 							    DBUSERNAME	    ACTION_NAME
+--------------------------------------------------------------------------- --------------- ----------------------------------------------------------------
+SQL_TEXT
+------------------------------------------------------------
+
+24-NOV-26 06.13.54.621009 PM						    SYS 	    ALTER USER
+ALTER USER app_academia IDENTIFIED BY * ACCOUNT UNLOCK
+
+
+
