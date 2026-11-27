@@ -1,0 +1,52 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:37:24Z origen=t6/estad
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8315972
+== 1 · Estadísticas de la tabla T6.CLIENTE ==
+
+TABLE_NAME           NUM_ROWS     BLOCKS AVG_ROW_LEN LAST_ANALYZED       STALE LOCKED
+------------------ ---------- ---------- ----------- ------------------- ----- ------
+CLIENTE                100000       1453         110 2026-11-27 21:37:22 NO
+== 2 · Cambios desde la última recogida (DBA_TAB_MODIFICATIONS; obsoleta si pasan del 10 %) ==
+== 3 · Columnas: lo que sabe el optimizador de cada una ==
+
+COLUMN_NAME                    NUM_DISTINCT  NUM_NULLS   DENSITY    BUCKETS HISTOGRAM       LAST_ANALYZED
+------------------------------ ------------ ---------- --------- ---------- --------------- -------------------
+APELLIDOS                               224          0  0.004464          1 NONE            2026-11-27 21:37:22
+CIUDAD                                 2000          0  0.000500          1 NONE            2026-11-27 21:37:22
+COMUNIDAD                                18          0  0.055556          1 NONE            2026-11-27 21:37:22
+DNI                                   98680          0  0.000010          1 NONE            2026-11-27 21:37:22
+EMAIL                                 99328          0  0.000010          1 NONE            2026-11-27 21:37:22
+FECHA_ALTA                             2854          0  0.000350          1 NONE            2026-11-27 21:37:22
+ID_CLIENTE                           100000          0  0.000010          1 NONE            2026-11-27 21:37:22
+NOMBRE                                  500          0  0.002000          1 NONE            2026-11-27 21:37:22
+PAIS                                     40          0  0.025000          1 NONE            2026-11-27 21:37:22
+SYS_STUBJHRJ63BYYQ61EBQAQU2TM_         2000          0  0.000500          1 NONE            2026-11-27 21:37:22
+== 4 · Extensiones (grupos de columnas y expresiones) ==
+
+EXTENSION_NAME                 EXTENSION                  CREATO
+------------------------------ -------------------------- ------
+SYS_STUBJHRJ63BYYQ61EBQAQU2TM_ ("CIUDAD","COMUNIDAD")     USER
+== 5 · Estadísticas PENDIENTES (recogidas con PUBLISH = FALSE, aún sin publicar) ==
+== 6 · Historial: versiones anteriores que se pueden restaurar ==
+
+CUANDO
+-------------------
+2026-11-27 21:37:22
+2026-11-27 21:37:16
+2026-11-27 21:28:58
+2026-11-27 21:28:53
+2026-11-27 21:22:36
+== 7 · Preferencias que usará la próxima recogida ==
+
+PREFERENCIA
+-------------
+VALOR
+----------------------------------------------------------------------------------------------------------------------------------
+PUBLISH
+TRUE
+
+METHOD_OPT
+FOR ALL COLUMNS SIZE 1
+
+STALE_PERCENT
+10
+

@@ -1,0 +1,25 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:32:50Z origen=t6/C17_entender
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8306583
+
+SYS@FREE> ALTER SESSION SET CONTAINER = FREEPDB1;
+
+Session altered.
+
+SYS@FREE> SET ECHO OFF
+
+ETQ        LLAMADAS LLAMADAS_SEG_SESION     P50_MS     P95_MS SLO
+-------- ---------- ------------------- ---------- ---------- ----------------
+C17_V1         3364                 9.3         71       77.5 INCUMPLE (< 20)
+
+1 row selected.
+
+ETQ         SNAP_ID HORA
+-------- ---------- --------
+V1_INI           18 21:30:29
+V1_FIN           19 21:32:47
+
+2 rows selected.
+
+-- Lectura: el ticket dice «va lenta»; la telemetría lo convierte en un número que se puede comparar después:
+-- la p95 incumple el SLO. Y tenemos un intervalo AWR que cubre exactamente la carga (las dos instantáneas).
+-- Lo mismo con la caja de herramientas:   t6 awr lista

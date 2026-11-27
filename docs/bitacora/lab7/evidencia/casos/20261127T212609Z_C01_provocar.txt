@@ -1,0 +1,12 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:26:09Z origen=t6/C01_provocar
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8299462
+
+==================== Referencia: 1 sesión de la aplicación (lo normal de un martes) ====================
+   carga C01_N1: 1 sesiones de la aplicación durante 20 s ...
+   carga C01_N1 terminada
+
+==================== Hora punta: el pool de la web abre 8 sesiones a la vez («para aguantar más») ====================
+   carga C01_N8: 8 sesiones de la aplicación durante 40 s ...
+   carga C01_N8 terminada
+
+-- Hecho. La web dice que «va lenta». Siguiente fase: caso C01 entender

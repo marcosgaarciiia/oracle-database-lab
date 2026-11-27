@@ -1,0 +1,23 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:26:57Z origen=t6/C01_observar
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8299680
+
+SYS@FREE> ALTER SESSION SET CONTAINER = FREEPDB1;
+
+Session altered.
+
+SYS@FREE> SET ECHO OFF
+== Las tres tandas y la ley de Little (throughput × latencia media ≈ sesiones) ==
+
+ETQ          SESIONES LLAMADAS_SEG MS_MEDIO CONCURRENCIA_LITTLE
+---------- ---------- ------------ -------- -------------------
+C01_N1              1          5.0    192.9                 1.0
+C01_N2              2          9.1    217.2                 2.0
+C01_N8              8          9.8    788.6                 7.7
+
+3 rows selected.
+
+== Lo que debes retener ==
+1. «Va lento» se convierte en números: throughput (llamadas/s) y latencia (p95) desde la telemetría (SLI).
+2. AAS > CPU_COUNT significa cola: el tiempo extra no es trabajo, es espera (resmgr:cpu quantum, ON CPU en cola).
+3. Más sesiones no es más rendimiento cuando el recurso ya está saturado: se dimensiona el pool a la capacidad.
+4. Antes de tocar el SQL se registra la línea base (sql_id, plan_hash, ms y gets por ejecución): t6 base ver

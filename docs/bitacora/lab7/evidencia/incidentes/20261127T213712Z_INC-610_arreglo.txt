@@ -1,0 +1,30 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:37:12Z origen=t6/INC-610_arreglo
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8315152
+-- Órdenes ejecutadas en sqlplus (/ as sysdba):
+   ALTER SESSION SET CONTAINER = FREEPDB1;
+   ALTER SYSTEM RESET optimizer_index_cost_adj SCOPE = BOTH;
+   COLUMN name FORMAT A32
+   COLUMN value FORMAT A12
+   SELECT name, value, isdefault, ismodified FROM v$system_parameter WHERE name = 'optimizer_index_cost_adj';
+   SELECT COUNT(*) AS en_spfile_pdb FROM v$spparameter WHERE name = 'optimizer_index_cost_adj' AND isspecified = 'TRUE' AND con_id = (SELECT con_id FROM v$pdbs WHERE name = 'FREEPDB1');
+
+-- Salida:
+
+Session altered.
+
+
+System altered.
+
+
+NAME				 VALUE	      ISDEFAULT ISMODIFI
+-------------------------------- ------------ --------- --------
+optimizer_index_cost_adj	 100	      TRUE	FALSE
+
+1 row selected.
+
+
+EN_SPFILE_PDB
+-------------
+	    0
+
+1 row selected.

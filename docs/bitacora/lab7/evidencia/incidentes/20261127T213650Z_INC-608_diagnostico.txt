@@ -1,0 +1,79 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:36:51Z origen=t6/INC-608_diagnostico
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8314727
+-- Órdenes ejecutadas en sqlplus (/ as sysdba):
+   ALTER SESSION SET CONTAINER = FREEPDB1;
+   DELETE FROM plan_table;
+   EXPLAIN PLAN FOR SELECT COUNT(*), SUM(importe), MAX(fecha_pedido) FROM t6.pedido WHERE estado = 'D';
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'BASIC +ROWS +PREDICATE'));
+   SELECT COUNT(*) AS reales FROM t6.pedido WHERE estado = 'D';
+   SELECT column_name, num_distinct, histogram FROM dba_tab_col_statistics WHERE owner = 'T6' AND table_name = 'PEDIDO' AND column_name = 'ESTADO';
+   SELECT DBMS_STATS.GET_PREFS('METHOD_OPT', 'T6', 'PEDIDO') AS method_opt_pedido, DBMS_STATS.GET_PREFS('METHOD_OPT') AS method_opt_global FROM dual;
+   SELECT TO_CHAR(stats_update_time, 'YYYY-MM-DD HH24:MI:SS') AS recogidas FROM dba_tab_stats_history WHERE owner = 'T6' AND table_name = 'PEDIDO' ORDER BY stats_update_time DESC FETCH FIRST 3 ROWS ONLY;
+   ROLLBACK;
+
+-- Salida:
+
+Session altered.
+
+
+0 rows deleted.
+
+
+Explained.
+
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Plan hash value: 2571571058
+
+---------------------------------------------
+| Id  | Operation	   | Name   | Rows  |
+---------------------------------------------
+|   0 | SELECT STATEMENT   |	    |	  1 |
+|   1 |  SORT AGGREGATE    |	    |	  1 |
+|*  2 |   TABLE ACCESS FULL| PEDIDO |	250K|
+---------------------------------------------
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   2 - filter("ESTADO"='D')
+
+14 rows selected.
+
+
+    REALES
+----------
+     28007
+
+1 row selected.
+
+
+COLUMN_NAME															 NUM_DISTINCT HISTOGRAM
+-------------------------------------------------------------------------------------------------------------------------------- ------------ ---------------
+ESTADO																	    4 NONE
+
+1 row selected.
+
+
+METHOD_OPT_PEDIDO
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+METHOD_OPT_GLOBAL
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOR ALL COLUMNS SIZE 1
+FOR ALL COLUMNS SIZE AUTO
+
+
+1 row selected.
+
+
+RECOGIDAS
+-------------------
+2026-11-27 21:36:40
+2026-11-27 21:35:25
+2026-11-27 21:35:13
+
+3 rows selected.
+
+
+Rollback complete.

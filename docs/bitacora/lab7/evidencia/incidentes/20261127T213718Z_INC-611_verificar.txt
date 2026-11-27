@@ -1,0 +1,9 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:37:19Z origen=t6/INC-611_verificar
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8315292
+== INC-611 · verificar · alumno E025 · semilla 25
+
+Session altered.
+
+OK    Incidente INC-611 roto para E025 (semilla 25) el 2026-11-27 21:37 · listado de Ciudad1425 / COM15
+FALLO Clientes estimados en Ciudad1425 / COM15: 3 (reales 50)
+FALLO Existe la extensión (CIUDAD, COMUNIDAD) con estadísticas
