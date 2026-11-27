@@ -1,3 +1,11 @@
 config/.env
 backups/
 scripts/t6/salidas/
+backups/
+*.ora
+*.dbf
+*.ctl
+*.arc
+*.bkp
+*.trc
+*.prf
