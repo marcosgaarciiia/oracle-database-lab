@@ -1,0 +1,14 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:26:56Z origen=t6/C01_validar
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8299679
+
+SYS@FREE> ALTER SESSION SET CONTAINER = FREEPDB1;
+
+Session altered.
+
+SYS@FREE> SET ECHO OFF FEEDBACK OFF
+
+RESULTADO
+--------------------------------------------------------------------------------------------------------------
+OK    Con 2 sesiones se atiende lo mismo que con 8: 9.1 frente a 9.8 llamadas/s
+OK    La latencia p95 baja de 1171 ms a 305 ms (menos cola)
+OK    Línea base del panel registrada en T6.LINEA_BASE (caso C01)

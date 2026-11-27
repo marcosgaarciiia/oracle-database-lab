@@ -1,0 +1,37 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:26:12Z origen=t6/C01_diagnosticar
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8299569
+
+SYS@FREE> ALTER SESSION SET CONTAINER = FREEPDB1;
+
+Session altered.
+
+SYS@FREE> SET ECHO OFF
+== 1 · Capacidad: CPU que puede usar la instancia ==
+
+CPU_COUNT
+---------
+2
+
+1 row selected.
+
+== 2 · AAS de cada tanda = muestras de ASH / segundos de la tanda (1 muestra ≈ 1 s de una sesión activa) ==
+
+ETQ          SESIONES   MUESTRAS        AAS     EN_CPU  ESPERANDO
+---------- ---------- ---------- ---------- ---------- ----------
+C01_N1              1         20          1         20          0
+C01_N8              8        328        7.8         85        243
+
+2 rows selected.
+
+== 3 · En qué esperaban las sesiones de la hora punta ==
+
+ETQ        EVENTO                           MUESTRAS        PCT
+---------- ------------------------------ ---------- ----------
+C01_N1     ON CPU                                 20        100
+C01_N8     resmgr:cpu quantum                    243       74.1
+C01_N8     ON CPU                                 85       25.9
+
+3 rows selected.
+
+-- Lectura: AAS por encima de CPU_COUNT = cola. «resmgr:cpu quantum» es la espera de turno de CPU que
+-- impone el gestor de recursos (en Oracle Free, el límite de 2 CPU): el trabajo no va más rápido, hace cola.
