@@ -1,0 +1,86 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:37:21Z origen=t6/INC-611_diagnostico
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8315701
+-- Órdenes ejecutadas en sqlplus (/ as sysdba):
+   ALTER SESSION SET CONTAINER = FREEPDB1;
+   SELECT /*+ GATHER_PLAN_STATISTICS inc611_antes */ COUNT(*), SUM(p.importe)
+     FROM t6.cliente c JOIN t6.pedido p ON p.id_cliente = c.id_cliente
+    WHERE c.ciudad = 'Ciudad1425' AND c.comunidad = 'COM15';
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(format => 'ALLSTATS LAST +PREDICATE -NOTE'));
+   SELECT COUNT(*) AS clientes_reales FROM t6.cliente WHERE ciudad = 'Ciudad1425' AND comunidad = 'COM15';
+   SELECT column_name, num_distinct FROM dba_tab_col_statistics WHERE owner = 'T6' AND table_name = 'CLIENTE' AND column_name IN ('CIUDAD', 'COMUNIDAD');
+   SELECT (SELECT num_rows FROM dba_tables WHERE owner = 'T6' AND table_name = 'CLIENTE') AS num_rows FROM dual;
+   SELECT COUNT(*) AS extensiones FROM dba_stat_extensions WHERE owner = 'T6' AND table_name = 'CLIENTE' AND creator = 'USER';
+
+-- Salida:
+
+Session altered.
+
+
+  COUNT(*) SUM(P.IMPORTE)
+---------- --------------
+       511	132820.52
+
+1 row selected.
+
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL_ID	04mtpjanhsmzv, child number 0
+-------------------------------------
+SELECT /*+ GATHER_PLAN_STATISTICS inc611_antes */ COUNT(*),
+SUM(p.importe)	 FROM t6.cliente c JOIN t6.pedido p ON p.id_cliente =
+c.id_cliente  WHERE c.ciudad = 'Ciudad1425' AND c.comunidad = 'COM15'
+
+Plan hash value: 2763311425
+
+-------------------------------------------------------------------------------------------------------------------------------
+| Id  | Operation			       | Name		   | Starts | E-Rows | A-Rows |   A-Time   | Buffers | Reads  |
+-------------------------------------------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT		       |		   |	  1 |	     |	    1 |00:00:00.01 |	 666 |	    7 |
+|   1 |  SORT AGGREGATE 		       |		   |	  1 |	   1 |	    1 |00:00:00.01 |	 666 |	    7 |
+|   2 |   NESTED LOOPS			       |		   |	  1 |	  28 |	  511 |00:00:00.01 |	 666 |	    7 |
+|   3 |    NESTED LOOPS 		       |		   |	  1 |	  30 |	  511 |00:00:00.01 |	 155 |	    7 |
+|*  4 |     TABLE ACCESS BY INDEX ROWID BATCHED| CLIENTE	   |	  1 |	   3 |	   50 |00:00:00.01 |	  52 |	    0 |
+|*  5 |      INDEX RANGE SCAN		       | IX_T6_CLI_CIUDAD  |	  1 |	  50 |	   50 |00:00:00.01 |	   2 |	    0 |
+|*  6 |     INDEX RANGE SCAN		       | IX_T6_PED_CLIENTE |	 50 |	  10 |	  511 |00:00:00.01 |	 103 |	    7 |
+|   7 |    TABLE ACCESS BY INDEX ROWID	       | PEDIDO 	   |	511 |	  10 |	  511 |00:00:00.01 |	 511 |	    0 |
+-------------------------------------------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   4 - filter("C"."COMUNIDAD"='COM15')
+   5 - access("C"."CIUDAD"='Ciudad1425')
+   6 - access("P"."ID_CLIENTE"="C"."ID_CLIENTE")
+
+
+28 rows selected.
+
+
+CLIENTES_REALES
+---------------
+	     50
+
+1 row selected.
+
+
+COLUMN_NAME															 NUM_DISTINCT
+-------------------------------------------------------------------------------------------------------------------------------- ------------
+CIUDAD																	 2000
+COMUNIDAD																   18
+
+2 rows selected.
+
+
+  NUM_ROWS
+----------
+    100000
+
+1 row selected.
+
+
+EXTENSIONES
+-----------
+	  0
+
+1 row selected.

@@ -1,0 +1,12 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:37:10Z origen=t6/top
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8315130
+== Top 5 sentencias por elapsed (filtro: -) ==
+
+SQL_ID         PLAN_HASH       EJEC SEG_TOTAL    MS_EJEC  GETS_EJEC FILAS_EJEC TEXTO
+------------- ---------- ---------- --------- ---------- ---------- ---------- ------------------------------------------
+53mx77snb43uw 2571571058         20       0.9       44.7       6847          1 SELECT /*+ t6_cp_v2 */ COUNT(*), SUM(IMPOR
+87gaftwrm2h68 2311451600       3677       0.5        0.1         29          1 select o.owner#,o.name,o.namespace,o.remot
+121ffmrc95v7g 2007068531        852       0.4        0.5          7          1 select i.obj#,i.ts#,i.file#,i.block#,i.int
+94qrpyyq3t85a 3919303943         32       0.4       11.9       3023          5 select fragobj#, indfragobj#, ts#, file#,
+1wrxv51auu7d7          0          1       0.4      377.0      65952          1 INSERT INTO AUDSYS.AUD$UNIFIED (AUDIT_TYPE
+-- Siguiente paso: «t6 plan SQL_ID» para ver el plan real de la que más pesa.

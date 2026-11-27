@@ -1,0 +1,172 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:37:12Z origen=t6/INC-610_diagnostico
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8315142
+-- Órdenes ejecutadas en sqlplus (/ as sysdba):
+   ALTER SESSION SET CONTAINER = FREEPDB1;
+   COLUMN name FORMAT A32
+   COLUMN value FORMAT A12
+   SELECT name, value, isdefault, ismodified, ispdb_modifiable FROM v$system_parameter WHERE isdefault = 'FALSE' AND (name LIKE 'optimizer%' OR name = 'cursor_sharing');
+   SELECT name, value, isspecified, con_id FROM v$spparameter WHERE isspecified = 'TRUE' AND name LIKE 'optimizer%';
+   BEGIN t6.app.buscar_cp_v2('30038'); ROLLBACK; END;
+   /
+   COLUMN sql_id NEW_VALUE sqlid
+   SELECT sql_id, plan_hash_value, executions, ROUND(buffer_gets/GREATEST(executions,1)) AS lecturas_por_ejec FROM v$sql WHERE sql_text LIKE 'SELECT /*+ t6_cp_v2 */%' AND ROWNUM = 1;
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR('&sqlid', NULL, 'BASIC +PREDICATE +OUTLINE'));
+   PROMPT -- Hipótesis probada SOLO en esta sesión: con el valor por defecto (100) el plan vuelve al índice
+   DELETE FROM plan_table;
+   EXPLAIN PLAN FOR SELECT COUNT(*), SUM(importe) FROM t6.pedido WHERE codigo_postal = :cp;
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'BASIC +COST'));
+   ALTER SESSION SET optimizer_index_cost_adj = 100;
+   DELETE FROM plan_table;
+   EXPLAIN PLAN FOR SELECT COUNT(*), SUM(importe) FROM t6.pedido WHERE codigo_postal = :cp;
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY(format => 'BASIC +COST'));
+   ROLLBACK;
+
+-- Salida:
+
+Session altered.
+
+
+no rows selected
+
+
+NAME				 VALUE	      ISSPEC	 CON_ID
+-------------------------------- ------------ ------ ----------
+optimizer_index_cost_adj	 4500	      TRUE	      3
+
+1 row selected.
+
+
+PL/SQL procedure successfully completed.
+
+
+SQL_ID	      PLAN_HASH_VALUE EXECUTIONS LECTURAS_POR_EJEC
+------------- --------------- ---------- -----------------
+53mx77snb43uw	   2571571058	      20	      6847
+
+1 row selected.
+
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXPLAINED SQL STATEMENT:
+------------------------
+SELECT /*+ t6_cp_v2 */ COUNT(*), SUM(IMPORTE) FROM T6.PEDIDO WHERE
+CODIGO_POSTAL = :B1
+
+Plan hash value: 2571571058
+
+-------------------------------------
+| Id  | Operation	   | Name   |
+-------------------------------------
+|   0 | SELECT STATEMENT   |	    |
+|   1 |  SORT AGGREGATE    |	    |
+|*  2 |   TABLE ACCESS FULL| PEDIDO |
+-------------------------------------
+
+Outline Data
+-------------
+
+  /*+
+      BEGIN_OUTLINE_DATA
+      IGNORE_OPTIM_EMBEDDED_HINTS
+      OPTIMIZER_FEATURES_ENABLE('23.1.0')
+      DB_VERSION('23.1.0')
+      OPT_PARAM('optimizer_index_cost_adj' 4500)
+      ALL_ROWS
+      OUTLINE_LEAF(@"SEL$1")
+      FULL(@"SEL$1" "PEDIDO"@"SEL$1")
+      END_OUTLINE_DATA
+  */
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   2 - filter("CODIGO_POSTAL"=:B1)
+
+EXPLAINED SQL STATEMENT:
+------------------------
+SELECT /*+ t6_cp_v2 */ COUNT(*), SUM(IMPORTE) FROM T6.PEDIDO WHERE
+CODIGO_POSTAL = :B1
+
+Plan hash value: 2571571058
+
+-------------------------------------
+| Id  | Operation	   | Name   |
+-------------------------------------
+|   0 | SELECT STATEMENT   |	    |
+|   1 |  SORT AGGREGATE    |	    |
+|*  2 |   TABLE ACCESS FULL| PEDIDO |
+-------------------------------------
+
+Outline Data
+-------------
+
+  /*+
+      BEGIN_OUTLINE_DATA
+      IGNORE_OPTIM_EMBEDDED_HINTS
+      OPTIMIZER_FEATURES_ENABLE('23.1.0')
+      DB_VERSION('23.1.0')
+      OPT_PARAM('optimizer_index_cost_adj' 4500)
+      ALL_ROWS
+      OUTLINE_LEAF(@"SEL$1")
+      FULL(@"SEL$1" "PEDIDO"@"SEL$1")
+      END_OUTLINE_DATA
+  */
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   2 - filter("CODIGO_POSTAL"=:B1)
+
+
+70 rows selected.
+
+-- Hipótesis probada SOLO en esta sesión: con el valor por defecto (100) el plan vuelve al índice
+
+0 rows deleted.
+
+
+Explained.
+
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Plan hash value: 2571571058
+
+--------------------------------------------------
+| Id  | Operation	   | Name   | Cost (%CPU)|
+--------------------------------------------------
+|   0 | SELECT STATEMENT   |	    |  1447   (1)|
+|   1 |  SORT AGGREGATE    |	    |		 |
+|   2 |   TABLE ACCESS FULL| PEDIDO |  1447   (1)|
+--------------------------------------------------
+
+9 rows selected.
+
+
+Session altered.
+
+
+3 rows deleted.
+
+
+Explained.
+
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Plan hash value: 2982358210
+
+--------------------------------------------------------------------------
+| Id  | Operation			     | Name	    | Cost (%CPU)|
+--------------------------------------------------------------------------
+|   0 | SELECT STATEMENT		     |		    |	 94   (0)|
+|   1 |  SORT AGGREGATE 		     |		    |		 |
+|   2 |   TABLE ACCESS BY INDEX ROWID BATCHED| PEDIDO	    |	 94   (0)|
+|   3 |    INDEX RANGE SCAN		     | IX_T6_PED_CP |	  3   (0)|
+--------------------------------------------------------------------------
+
+10 rows selected.
+
+
+Rollback complete.
