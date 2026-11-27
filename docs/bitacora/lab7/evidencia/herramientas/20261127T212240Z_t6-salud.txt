@@ -1,0 +1,30 @@
+== EVIDENCIA alumno=E025 hora=2026-11-27T21:22:40Z origen=t6/salud
+== EVIDENCIA contenedor=2aaaadf41294 dbid=1509902213 arranque=2026-11-27T21:22:07 scn=8298482
+== 1 · Carga frente a capacidad: AAS por minuto (V$CON_SYSMETRIC_HISTORY) y CPU_COUNT ==
+== 2 · En qué se va el tiempo (ASH, muestras de 1 s de sesiones activas de esta PDB) ==
+
+WAIT_CLASS     EVENTO                                     MUESTRAS    PCT
+-------------- ---------------------------------------- ---------- ------
+CPU            ON CPU                                           10   71.4
+User I/O       direct path write                                 3   21.4
+User I/O       db file sequential read                           1    7.1
+== 3 · Quién lo consume: SQL_ID y módulo con más muestras ==
+
+SQL_ID        MODULE           ACTION           MUESTRAS    PCT TEXTO
+------------- ---------------- -------------- ---------- ------ --------------------------------------------
+2dt1vq42sjjv9 sqlplus@2aaaadf4                         2   15.4
+              1294 (TNS V1-V3)
+
+62ugxgb29707g dbms_stats: gath T6.PEDIDO               1    7.7
+              er table stats
+
+70mnsx46z6ya6 sqlplus@2aaaadf4                         1    7.7
+              1294 (TNS V1-V3)
+
+5227ykzxr46kh sqlplus@2aaaadf4                         1    7.7
+              1294 (TNS V1-V3)
+
+1h50ks4ncswfn sqlplus@2aaaadf4                         1    7.7
+              1294 (TNS V1-V3)
+
+-- Siguiente paso: con el SQL_ID de arriba, «t6 plan SQL_ID» (playbook PB-2). Con esperas de una sola clase, PB-1 rama 2.
